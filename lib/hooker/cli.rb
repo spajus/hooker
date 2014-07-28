@@ -19,7 +19,7 @@ module Hooker
       puts ::Hooker::Repos.list(options).map(&:full_name).sort.join("\n")
     end
 
-    desc 'repos', 'List hooks'
+    desc 'hooks', 'List hooks'
     option :user
     option :org
     option :type
@@ -33,7 +33,40 @@ module Hooker
       end
     end
 
+    desc 'ensure_hooks', 'Updates or creates hook'
+    option :user
+    option :org
+    option :type
+    option :repo
+    option :hook_url
+    option :events
+    def ensure_hooks
+      hook_url = options[:hook_url]
+      events = options[:events]
+      if hook_url.nil? || events.nil?
+        puts 'Please provide --hook_url <url> and --events <comma,separated,events>'
+        exit 1
+      end
+      events = events.split(',')
+      if events.empty?
+        puts 'Please provide --events <comma,separated,events>'
+        exit 1
+      end
+      if repo = options[:repo]
+        ensure_hook(repo, hook_url, events)
+      else
+        repos = ::Hooker::Repos.list(options).map(&:full_name).sort
+        repos.each { |r| ensure_hook(r, hook_url, events) }
+      end
+    end
+
     private
+
+    def ensure_hook(repo, hook_url, events)
+      puts repo
+      puts ::Hooker::Hooks.ensure_exists(repo, hook_url, events, options)
+      puts "\n"
+    end
 
     def print_hooks(repo)
       puts "#{repo}\n"

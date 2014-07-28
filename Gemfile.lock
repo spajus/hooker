@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hooker (0.0.1)
+    mass-hooker (0.0.1)
       octokit (~> 3.0)
       thor (~> 0.19)
 
@@ -38,6 +38,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.6)
-  hooker!
+  mass-hooker!
   rake
   rspec

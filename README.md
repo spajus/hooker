@@ -5,7 +5,7 @@ Command line tool to control GitHub repository web hooks in multiple repos in bu
 ### Installing
 
 ```console
-$ gem install hooker
+$ gem install mass-hooker
 ```
 
 ### Before you run it

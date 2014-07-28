@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hooker/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'hooker'
+  spec.name          = 'mass-hooker'
   spec.version       = Hooker::VERSION
   spec.authors       = ['Tomas Varaneckas']
   spec.email         = ['tomas.varaneckas@gmail.com']
